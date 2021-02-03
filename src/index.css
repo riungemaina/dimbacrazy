@@ -3,6 +3,7 @@
 body {
   margin: 0;
   font-family: "Roboto", Arial, Helvetica, sans-serif;
+  background-color: #e0e0ff;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -11,4 +12,8 @@ body {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+}
+
+img {
+  width: 100%;
 }
