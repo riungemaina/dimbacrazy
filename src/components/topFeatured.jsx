@@ -82,6 +82,7 @@ const Featured = styled.div`
   justify-content: center;
   gap: 20px;
   align-items: center;
+  border-bottom: 1px solid #000;
 `;
 
 const FeaturedPost = styled.div`
