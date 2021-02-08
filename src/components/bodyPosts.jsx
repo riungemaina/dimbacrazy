@@ -1,7 +1,10 @@
 import React from "react";
 import styled from "styled-components";
+import { useApi } from "./context";
 
 export default function () {
+  const api = useApi();
+  const posts = api.bodyPosts;
   return (
     <>
       <Wrapper>
