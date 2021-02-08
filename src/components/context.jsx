@@ -16,8 +16,10 @@ export const DimbaProvider = ({ children }) => {
   const [featured, setFeatured] = useState([]);
   const [introPosts, setIntroPosts] = useState([]);
 
+  const Link = "https://dimbacrazy.castynet.africa";
+
   const postData = async () => {
-    fetch("https://dimbacrazy.castynet.africa/api/collections/get/Articles", {
+    fetch(Link + "/api/collections/get/Articles", {
       headers: { Authorization: "Bearer abc61e9be614a9efd48cd2a4336868" },
     })
       .then((res) => res.json())
@@ -29,8 +31,21 @@ export const DimbaProvider = ({ children }) => {
       });
   };
 
+  function Loaded() {
+    if (
+      (posts.length === 0,
+      featured.length === 0,
+      bodyPosts.length === 0,
+      introPosts.length === 0)
+    ) {
+      return false;
+    } else return true;
+  }
+
   return (
-    <DimbaContext.Provider value={{ posts, bodyPosts, featured, introPosts }}>
+    <DimbaContext.Provider
+      value={{ posts, bodyPosts, featured, introPosts, Loaded, Link }}
+    >
       {children}
     </DimbaContext.Provider>
   );
