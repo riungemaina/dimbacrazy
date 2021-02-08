@@ -1,13 +1,22 @@
 import React from "react";
 import styled from "styled-components";
+import { useApi } from "./context";
 
 export default function () {
+  const api = useApi();
+  const posts = api.bodyPosts;
+  const fP = api.featured;
+  const featuredPost = fP[0];
+  const apiLink = api.Link;
+  console.log(featuredPost);
+  console.log(featuredPost.CoverImage.path);
+
   return (
     <>
       <Featured>
         <FeaturedPost>
-          <img src="./data/southampton.jpeg" />
-          <Heading>Southampton lose 9-0 to a flying Manchester United</Heading>
+          <img src={apiLink + "/" + featuredPost.CoverImage.path} />
+          <Heading>{featuredPost.Title}</Heading>
           <p>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
             eiusmod tempor incididunt ut labore et dolore magna aliqua ...
