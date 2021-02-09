@@ -5,69 +5,19 @@ import { useApi } from "./context";
 export default function () {
   const api = useApi();
   const posts = api.bodyPosts;
+  const apiLink = api.Link;
+
   return (
     <>
       <Wrapper>
-        <Post>
-          <Image>
-            <img src="./data/mancity.jpg" alt="" />
-          </Image>
-          <Title>Man City go clear top of the table</Title>
-        </Post>
-        <Post>
-          <Image>
-            <img src="./data/mancity.jpg" alt="" />
-          </Image>
-          <Title>Man City go clear top of the table</Title>
-        </Post>
-        <Post>
-          <Image>
-            <img src="./data/mancity.jpg" alt="" />
-          </Image>
-          <Title>Man City go clear top of the table</Title>
-        </Post>
-        <Post>
-          <Image>
-            <img src="./data/mancity.jpg" alt="" />
-          </Image>
-          <Title>Man City go clear top of the table</Title>
-        </Post>
-        <Post>
-          <Image>
-            <img src="./data/mancity.jpg" alt="" />
-          </Image>
-          <Title>Man City go clear top of the table</Title>
-        </Post>
-        <Post>
-          <Image>
-            <img src="./data/mancity.jpg" alt="" />
-          </Image>
-          <Title>Man City go clear top of the table</Title>
-        </Post>
-        <Post>
-          <Image>
-            <img src="./data/mancity.jpg" alt="" />
-          </Image>
-          <Title>Man City go clear top of the table</Title>
-        </Post>
-        <Post>
-          <Image>
-            <img src="./data/mancity.jpg" alt="" />
-          </Image>
-          <Title>Man City go clear top of the table</Title>
-        </Post>
-        <Post>
-          <Image>
-            <img src="./data/mancity.jpg" alt="" />
-          </Image>
-          <Title>Man City go clear top of the table</Title>
-        </Post>
-        <Post>
-          <Image>
-            <img src="./data/mancity.jpg" alt="" />
-          </Image>
-          <Title>Man City go clear top of the table</Title>
-        </Post>
+        {posts.map((post) => (
+          <Post>
+            <Image>
+              <img src={apiLink + "/" + post.CoverImage.path} />
+            </Image>
+            <Title>{post.Title.substring(0, 45)}...</Title>
+          </Post>
+        ))}
         <FillerDiv></FillerDiv>
         <FillerDiv></FillerDiv>
         <FillerDiv></FillerDiv>
@@ -83,6 +33,7 @@ const FillerDiv = styled.div`
 `;
 
 const Title = styled.h3`
+  font-size: 0.9em;
   padding-top: 10px;
 `;
 

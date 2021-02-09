@@ -25,7 +25,7 @@ export const DimbaProvider = ({ children }) => {
       .then((res) => res.json())
       .then((res) => {
         setPosts(res.entries);
-        setBodyPosts(res.entries.slice(5));
+        setBodyPosts(res.entries.slice(5, 17));
         setFeatured(res.entries.slice(0, 1));
         setIntroPosts(res.entries.slice(1, 5));
       });
