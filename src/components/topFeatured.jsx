@@ -4,49 +4,28 @@ import { useApi } from "./context";
 
 export default function () {
   const api = useApi();
-  const posts = api.bodyPosts;
-  const fP = api.featured;
-  const featuredPost = fP[0];
+  const posts = api.introPosts;
+  const featuredPost = api.featured[0];
   const apiLink = api.Link;
-  console.log(featuredPost);
-  console.log(featuredPost.CoverImage.path);
+  const postSummary = featuredPost.Post.substring(0, 170);
 
   return (
     <>
       <Featured>
         <FeaturedPost>
           <img src={apiLink + "/" + featuredPost.CoverImage.path} />
-          <Heading>{featuredPost.Title}</Heading>
-          <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua ...
-          </p>
+          <Heading>{featuredPost.Title.substring(0, 60)}...</Heading>
+          <p>{postSummary}...</p>
         </FeaturedPost>
         <Posts>
-          <SinglePost>
-            <Image>
-              <img src="./data/mancity.jpg" />
-            </Image>
-            <HeadingSub>Messi to sign for Mancity in May</HeadingSub>
-          </SinglePost>
-          <SinglePost>
-            <Image>
-              <img src="./data/transfers.jpg" />
-            </Image>
-            <HeadingSub>The Jan Transfer Window Closes</HeadingSub>
-          </SinglePost>
-          <SinglePost>
-            <Image>
-              <img src="./data/betting.jpg" />
-            </Image>
-            <HeadingSub>This is How to bet Responsibly</HeadingSub>
-          </SinglePost>
-          <SinglePost>
-            <Image>
-              <img src="./data/transfers.jpg" />
-            </Image>
-            <HeadingSub>The biggest Transfers this January</HeadingSub>
-          </SinglePost>
+          {posts.map((post) => (
+            <SinglePost key={post._id}>
+              <Image>
+                <img src={apiLink + "/" + post.CoverImage.path} />
+              </Image>
+              <HeadingSub>{post.Title.substring(0, 46)}</HeadingSub>
+            </SinglePost>
+          ))}
         </Posts>
       </Featured>
     </>
