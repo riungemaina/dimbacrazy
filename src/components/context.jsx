@@ -1,4 +1,5 @@
 import React, { useContext, useState, useEffect } from "react";
+import { Slugify } from "./helpers";
 
 const DimbaContext = React.createContext();
 
@@ -24,10 +25,16 @@ export const DimbaProvider = ({ children }) => {
     })
       .then((res) => res.json())
       .then((res) => {
-        setPosts(res.entries);
-        setBodyPosts(res.entries.slice(5, 17));
-        setFeatured(res.entries.slice(0, 1));
-        setIntroPosts(res.entries.slice(1, 5));
+        var rawPosts = res.entries;
+        var slugified = rawPosts.map(function (el) {
+          var o = Object.assign({}, el);
+          o.slug = Slugify(o.Title);
+          return o;
+        });
+        setPosts(slugified);
+        setBodyPosts(slugified.slice(5, 17));
+        setFeatured(slugified.slice(0, 1));
+        setIntroPosts(slugified.slice(1, 5));
       });
   };
 
