@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { useApi } from "./context";
+import { Link } from "react-router-dom";
 
 export default function () {
   const api = useApi();
@@ -11,12 +12,14 @@ export default function () {
     <>
       <Wrapper>
         {posts.map((post) => (
-          <Post>
-            <Image>
-              <img src={apiLink + "/" + post.CoverImage.path} />
-            </Image>
-            <Title>{post.Title.substring(0, 45)}...</Title>
-          </Post>
+          <StyledLink key={post._id} to={`/product/${post.slug}`}>
+            <Post>
+              <Image>
+                <img src={apiLink + "/" + post.CoverImage.path} />
+              </Image>
+              <Title>{post.Title.substring(0, 45)}...</Title>
+            </Post>
+          </StyledLink>
         ))}
         <FillerDiv></FillerDiv>
         <FillerDiv></FillerDiv>
@@ -26,6 +29,20 @@ export default function () {
     </>
   );
 }
+
+const StyledLink = styled(Link)`
+  color: inherit;
+  text-decoration: inherit;
+
+  &:focus,
+  &:hover,
+  &:visited,
+  &:link,
+  &:active {
+    color: inherit;
+    text-decoration: inherit;
+  }
+`;
 
 const FillerDiv = styled.div`
   height: 0;
