@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { useApi } from "./context";
+import { Link } from "react-router-dom";
 
 export default function () {
   const api = useApi();
@@ -12,25 +13,43 @@ export default function () {
   return (
     <>
       <Featured>
-        <FeaturedPost>
-          <img src={apiLink + "/" + featuredPost.CoverImage.path} />
-          <Heading>{featuredPost.Title.substring(0, 60)}...</Heading>
-          <p>{postSummary}...</p>
-        </FeaturedPost>
+        <StyledLink to={`/product/${featuredPost.slug}`}>
+          <FeaturedPost>
+            <img src={apiLink + "/" + featuredPost.CoverImage.path} />
+            <Heading>{featuredPost.Title.substring(0, 60)}...</Heading>
+            <p>{postSummary}...</p>
+          </FeaturedPost>
+        </StyledLink>
         <Posts>
           {posts.map((post) => (
-            <SinglePost key={post._id}>
-              <Image>
-                <img src={apiLink + "/" + post.CoverImage.path} />
-              </Image>
-              <HeadingSub>{post.Title.substring(0, 46)}</HeadingSub>
-            </SinglePost>
+            <StyledLink key={post._id} to={`/product/${post.slug}`}>
+              <SinglePost>
+                <Image>
+                  <img src={apiLink + "/" + post.CoverImage.path} />
+                </Image>
+                <HeadingSub>{post.Title.substring(0, 46)}</HeadingSub>
+              </SinglePost>
+            </StyledLink>
           ))}
         </Posts>
       </Featured>
     </>
   );
 }
+
+const StyledLink = styled(Link)`
+  color: inherit;
+  text-decoration: inherit;
+
+  &:focus,
+  &:hover,
+  &:visited,
+  &:link,
+  &:active {
+    color: inherit;
+    text-decoration: inherit;
+  }
+`;
 
 const Image = styled.div`
   width: 100%;
