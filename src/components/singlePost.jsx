@@ -1,27 +1,47 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import ReactMarkdown from "react-markdown";
-import file from "./md/posts.md";
+import { useApi } from "./context";
+import Loading from "./loader";
 
-export default function () {
-  const [markdown, setMarkdown] = useState("");
+export default function (data) {
+  const api = useApi();
+  const [post, setPost] = useState();
+
+  const slug = data.match.params.slug;
+  const singlePost = api.posts.find((obj) => obj.slug === slug);
 
   useEffect(() => {
-    fetch(file)
-      .then((res) => res.text())
-      .then((text) => setMarkdown(text));
-  }, []);
+    setPost(singlePost);
+  }, [singlePost]);
+
+  function ProductInfo() {
+    if (post === undefined) {
+      return <Loading />;
+    } else {
+      return <LoadedPost />;
+    }
+  }
+
+  function LoadedPost() {
+    return (
+      <>
+        <h1>{singlePost.Title}</h1>
+        <ReactMarkdown source={post.Post} />
+      </>
+    );
+  }
 
   return (
     <>
-      <Post>
-        <ReactMarkdown source={markdown} />
-      </Post>
+      <PostWrapper>
+        <ProductInfo />
+      </PostWrapper>
     </>
   );
 }
 
-const Post = styled.div`
+const PostWrapper = styled.div`
   padding: 20px;
   display: flex;
   flex-direction: column;
