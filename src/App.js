@@ -9,6 +9,7 @@ import Footer from "./components/footer";
 import SinglePost from "./components/singlePost";
 import Loader from "./components/loader";
 import NotFound from "./components/404";
+import Category from "./components/categories";
 
 export default function App() {
   const api = useApi();
@@ -27,8 +28,12 @@ export default function App() {
           <Switch>
             <Route exact path="/" component={Content} />
             <Route
-              path="/product/:slug"
+              path="/post/:slug"
               render={(props) => <SinglePost {...props} />}
+            />
+            <Route
+              path="/category/:c"
+              render={(props) => <Category {...props} />}
             />
             <Route exact path="/not-found" component={NotFound} />
             <Route component={NotFound} />
