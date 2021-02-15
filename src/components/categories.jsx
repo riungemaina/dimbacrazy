@@ -1,9 +1,3 @@
-//         news,
-//         epl,
-//         kpl,
-//         laliga,
-//         seriea,
-//         betting,
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { useApi } from "./context";
