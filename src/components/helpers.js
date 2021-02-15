@@ -1,3 +1,11 @@
+import { TwitterWithCircle } from "@styled-icons/entypo-social/TwitterWithCircle";
+import { FacebookWithCircle } from "@styled-icons/entypo-social/FacebookWithCircle";
+
+export const Icon = {
+  Twitter: TwitterWithCircle,
+  Facebook: FacebookWithCircle,
+};
+
 export function Year() {
   var d = new Date();
   var n = d.getFullYear();
